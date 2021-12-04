@@ -1,0 +1,9 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/dery_ru/philo/philo_norm'
+gcc -Wall -Wextra -Werror -g -I includes/ -c logic.c -o logic.o
+gcc -Wall -Wextra -Werror -g -I includes/ -c philo.c -o philo.o
+gcc -Wall -Wextra -Werror -g -I includes/ -c utils.c -o utils.o
+gcc -Wall -Wextra -Werror -g -I includes/ -c utils2.c -o utils2.o
+gcc -Wall -Wextra -Werror -g -I includes/ ./logic.o ./philo.o ./utils.o ./utils2.o -o philo
+make: Leaving directory `/Users/dery_ru/philo/philo_norm'
+ 
