@@ -1,6 +1,6 @@
 #include "philo_bonus.h"
 
-static void one_philo(t_data *data)
+static void	one_philo(t_data *data)
 {
 	ft_delay(data->time_to_die);
 	ft_print(data, 1, "died");
@@ -27,7 +27,7 @@ void	*waiter(void *in_data)
 	t_data	*data;
 
 	data = (t_data *)in_data;
-	while(1)
+	while (1)
 	{
 		ft_delay(10);
 		if ((data->lifetime + data->time_to_die) <= ft_time(data) - 2)
@@ -37,7 +37,7 @@ void	*waiter(void *in_data)
 			exit (1);
 		}
 	}
-	return(NULL);
+	return (NULL);
 }
 
 void	lifetime(t_data *data)
@@ -49,7 +49,7 @@ void	lifetime(t_data *data)
 	pthread_detach(delay);
 	if (data->i % 2)
 		ft_delay(data->time_to_eat / 2);
-	while(1)
+	while (1)
 	{
 		eating(data, data->i + 1);
 		data->eat_count--;

@@ -14,7 +14,7 @@ static void	eating(t_data *data, int num)
 	ft_print(data, num, "has taken a rigth fork");
 	pthread_mutex_lock(&data->fork_m[left_f]);
 	ft_print(data, num, "has taken a left fork");
-	data->lifetime[data->i] = ft_time(data);
+	data->lifetime[num - 1] = ft_time(data);
 	ft_print(data, num, "is eating");
 	ft_delay(data->time_to_eat);
 	pthread_mutex_unlock(&data->fork_m[left_f]);
@@ -64,25 +64,27 @@ void	*lifetime(void *in_data)
 {
 	t_data	*data;
 	int		num;
+	int		temp_eat;
 
 	data = (t_data *)in_data;
+	temp_eat = data->eat_count;
 	num = data->i + 1;
 	pthread_mutex_unlock(&data->lock_m);
 	data->lifetime[num - 1] = ft_time(data);
 	if (num % 2)
 		ft_delay(data->time_to_eat / 2);
-	while (data->eat_count)
+	while (temp_eat)
 	{
 		eating(data, num);
 		ft_print(data, num, "is sleeping");
 		ft_delay(data->time_to_sleep);
 		ft_print(data, num, "is thinking");
-		data->eat_count--;
+		temp_eat--;
 	}
-	if (data->eat_count == 0)
+	if (temp_eat == 0)
 	{
 		data->i--;
-		data->lifetime[num] = -1;
+		data->lifetime[num - 1] = -1;
 	}
 	return (NULL);
 }
